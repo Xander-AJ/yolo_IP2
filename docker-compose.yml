@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   app:
     build:
       context: .
@@ -13,8 +12,10 @@ services:
     networks:
       - IP-2-network
     volumes:
-      - ./client:/app  # Mount the client folder into the /app directory in the container
-      - app-data:/app/data
+      - ./client:/app/client  # Mount the client folder into the /app/client directory in the container
+      - .:/app  # Mount the project root into the /app directory in the container
+    volumes:
+      - app-data:/app/data  # Mount the data volume for your app
 
   mongo:
     build:
@@ -31,4 +32,5 @@ networks:
 volumes:
   app-data:
   mongo-data:
+
 

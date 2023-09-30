@@ -3,29 +3,23 @@ version: '3'
 services:
 
   app:
-
     build:
       context: .
       dockerfile: Dockerfile-node
-
     ports:
       - "3000:3000"
-
     depends_on:
       - mongo
-
     networks:
       - IP-2-network
-
     volumes:
+      - ./client:/app  # Mount the client folder into the /app directory in the container
       - app-data:/app/data
 
   mongo:
-
     build:
       context: .
       dockerfile: Dockerfile-mongodb
-
     networks:
       - IP-2-network
     volumes:

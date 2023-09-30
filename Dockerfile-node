@@ -1,18 +1,14 @@
 FROM node:latest
-WORKDIR /app/client
-
-# Copy package.json and package-lock.json
-COPY client/package*.json ./
-RUN npm install
-
-# Copy all other client files
-COPY client/. ./
-
-# Switch to the parent directory
 WORKDIR /app
 
-# Copy the rest of the project files
-COPY . ./
+# Copy package.json and package-lock.json
+COPY client/package*.json ./client/
+RUN cd client && npm install
+
+# Copy all other client files
+COPY client/. ./client/
+COPY . .
 
 EXPOSE 3000
 CMD ["npm", "start"]
+

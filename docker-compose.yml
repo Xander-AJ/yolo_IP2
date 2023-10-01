@@ -1,8 +1,7 @@
-yaml
 version: '3'
 
 services:
- app:
+  app:
     build:
       context: .
       dockerfile: Dockerfile-app
@@ -18,7 +17,7 @@ services:
     volumes:
       - app-data:/app/data # Mount the data volume for your app
 
- mongo:
+  mongo:
     build:
       context: .
       dockerfile: Dockerfile-mongodb
@@ -28,8 +27,8 @@ services:
       - mongo-data:/data/db
 
 networks:
- IP-2-network:
+  IP-2-network:
 
 volumes:
- app-data:
- mongo-data:
+  app-data:
+  mongo-data:

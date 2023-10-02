@@ -1,0 +1,19 @@
+# Use a node base image
+FROM node:latest
+
+# Set working directory for backend service
+WORKDIR /app/backend
+
+# Copy backend package.json and install dependencies
+COPY backend/package*.json ./
+RUN npm install
+
+# Copy backend source files
+COPY backend/ ./
+
+# Expose the backend service port
+EXPOSE 3000
+
+# Command to run the backend service
+CMD ["npm", "start"]
+

@@ -4,9 +4,9 @@ services:
   mongodb:
     image: mongo:latest
     networks:
-      - IP-2-network
+      - yolo_ip2_IP-2-network
     ports:
-      - "27017:27017" # Ensure MongoDB is accessible from outside the container for development purposes
+      - "27017:27017"
 
   backend:
     build:
@@ -17,11 +17,9 @@ services:
     volumes:
       - ./backend:/app/backend
     networks:
-      - IP-2-network
+      - yolo_ip2_IP-2-network
     env_file:
       - .env   # Load environment variables from .env file
-    depends_on:
-      - mongodb  # Ensure backend waits for MongoDB to be ready before starting
 
   frontend:
     build:
@@ -32,12 +30,10 @@ services:
     volumes:
       - ./client:/app/client
     networks:
-      - IP-2-network
+      - yolo_ip2_IP-2-network
     env_file:
       - .env   # Load environment variables from .env file
-    depends_on:
-      - backend  # Ensure frontend waits for backend to be ready before starting
 
 networks:
-  IP-2-network:
+  yolo_ip2_IP-2-network:
 

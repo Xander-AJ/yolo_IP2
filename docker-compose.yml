@@ -36,4 +36,5 @@ services:
 
 networks:
   yolo_ip2_IP-2-network:
+    driver: bridge
 

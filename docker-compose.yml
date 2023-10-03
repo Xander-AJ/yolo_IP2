@@ -11,6 +11,8 @@ services:
       - ./backend:/app/backend
     networks:
       - IP-2-network
+    env_file:
+      - .env   # Load environment variables from .env file
 
   frontend:
     build:
@@ -22,6 +24,8 @@ services:
       - ./client:/app/client
     networks:
       - IP-2-network
+    env_file:
+      - .env   # Load environment variables from .env file
 
 networks:
   IP-2-network:

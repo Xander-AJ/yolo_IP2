@@ -1,40 +1,40 @@
 version: '3'
-
 services:
+  # MongoDB Container (using the existing container)
   mongodb:
+    container_name: mongodb
     image: mongo:latest
     networks:
-      - my_network
-    ports:
-      - "27017:27017"
-
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile-backend
-    ports:
-      - "3000:3000"
+      - yolo_ip2_network
     volumes:
-      - ./backend:/app/backend
-    networks:
-      - my_network
-    env_file:
-      - .env   # Load environment variables from .env file
+      - mongodb_data:/data/db
 
-  frontend:
-    build:
-      context: .
-      dockerfile: Dockerfile-frontend
-    ports:
-      - "3001:3000"
-    volumes:
-      - ./client:/app/client
+  # Node.js Backend Container (using the existing container)
+  node_IP2:
+    container_name: node_IP2
+    image: node:latest
     networks:
-      - my_network
-    env_file:
-      - .env   # Load environment variables from .env file
+      - yolo_ip2_network
+    depends_on:
+      - mongodb
+    volumes:
+      - ./app:/app
+
+  # Frontend Container (React app served by Nginx)
+  frontend_ip2:
+    build:
+      context: ./client/src  
+      dockerfile: Dockerfile-frontend  
+    ports:
+      - "3000:3000"  
+    networks:
+      - yolo_ip2_network
 
 networks:
-  my_network:
-    driver: bridge
+  yolo_ip2_network:
+    external: true
+
+volumes:
+  mongodb_data:
+    driver: local
 

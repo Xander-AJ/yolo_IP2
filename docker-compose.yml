@@ -1,32 +1,31 @@
 version: '3'
 services:
-  # MongoDB Container (using the existing container)
-  mongodb:
-    container_name: mongodb
+  # MongoDB Container
+  mongo_ip2:
+    container_name: mongo_ip2
     image: mongo:latest
     networks:
       - yolo_ip2_network
     volumes:
       - mongodb_data:/data/db
 
-  # Node.js Backend Container (using the existing container)
-  node_IP2:
-    container_name: node_IP2
+  # Node.js Backend Container
+  node_ip2:
+    container_name: node_ip2
     image: node:latest
     networks:
       - yolo_ip2_network
     depends_on:
-      - mongodb
+      - mongo_ip2
     volumes:
       - ./app:/app
 
-  # Frontend Container (React app served by Nginx)
-  frontend_ip2:
-    build:
-      context: ./client/src  
-      dockerfile: Dockerfile-frontend  
+  # Frontend Container using Nginx
+  nginx_ip2:
+    container_name: nginx_ip2
+    image: nginx:alpine
     ports:
-      - "3000:3000"  
+      - "3000:80"
     networks:
       - yolo_ip2_network
 

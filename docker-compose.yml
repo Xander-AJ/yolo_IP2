@@ -1,7 +1,7 @@
 version: '3'
 services:
-  # MongoDB Container
-  mongo_ip2:
+  # MongoDB Container (same as before)
+  mongodb:
     container_name: mongo_ip2
     image: mongo:latest
     networks:
@@ -9,23 +9,34 @@ services:
     volumes:
       - mongodb_data:/data/db
 
-  # Node.js Backend Container
-  node_ip2:
+  # Node.js Backend Container (same as before)
+  node:
     container_name: node_ip2
     image: node:latest
     networks:
       - yolo_ip2_network
     depends_on:
-      - mongo_ip2
+      - mongodb
     volumes:
       - ./app:/app
 
-  # Frontend Container using Nginx
-  nginx_ip2:
-    container_name: nginx_ip2
-    image: nginx:alpine
+  # Frontend Container (using the React Dockerfile)
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "3000:3000"
+    networks:
+      - yolo_ip2_network
+
+  # Ngrok Container (using the Ngrok Dockerfile)
+  ngrok:
+    build:
+      context: . 
+      dockerfile: Dockerfile-ngrok
+    ports:
+      - "4040:4040"  # Expose Ngrok web interface (optional)
     networks:
       - yolo_ip2_network
 

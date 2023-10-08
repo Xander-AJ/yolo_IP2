@@ -4,6 +4,13 @@ FROM node:latest
 # Set the working directory inside the container
 WORKDIR /app
 
+# Install Ngrok
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
+    unzip ngrok-stable-linux-amd64.zip && \
+    rm ngrok-stable-linux-amd64.zip && \
+    chmod +x ./ngrok && \
+    mv ngrok /usr/local/bin/ngrok
+
 # Copy package.json and package-lock.json to the container
 COPY package*.json ./
 
@@ -13,8 +20,9 @@ RUN npm install
 # Copy all files from the current directory to the container
 COPY . .
 
-# Expose the port the app runs on
+# Expose port 3000 for the Node.js application
 EXPOSE 3000
 
-# Command to run the application
-CMD ["node", "app.js"]
+# Command to run the application with Ngrok
+CMD ["bash", "-c", "node server.js & ngrok http 3000"]
+

@@ -12,7 +12,7 @@ RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
     mv ngrok /usr/local/bin/ngrok
 
 # Copy package.json and package-lock.json to the container
-COPY package*.json ./
+COPY backend/package*.json ./
 
 # Install dependencies
 RUN npm install

@@ -20,9 +20,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy:prod": "rsync -avzhe ssh --progress /home/casper--x7/Documents/Moringa_DevOps/week_4/yolo_IP2/client/public/* root@ip2.com:/home/casper--x7/Documents/Moringa_DevOps/week_4/yolo_IP2"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost3000",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -39,3 +40,4 @@
     ]
   }
 }
+

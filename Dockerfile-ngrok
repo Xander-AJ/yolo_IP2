@@ -15,4 +15,3 @@ EXPOSE 4040
 
 # Command to run Ngrok
 CMD ["./ngrok", "http", "3000"]
-

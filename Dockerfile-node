@@ -20,9 +20,8 @@ RUN npm install
 # Copy all files from the current directory to the container
 COPY . .
 
-# Expose port 3000 for the Node.js application
-EXPOSE 3000
+# Expose port 5000 for the Node.js application (backend)
+EXPOSE 5000
 
-# Command to run the application with Ngrok
-CMD ["bash", "-c", "node server.js & ngrok http 3000"]
-
+# Command to run the application with Ngrok (starts backend on port 5000)
+CMD ["bash", "-c", "node server.js & ngrok http 5000"]

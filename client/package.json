@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "express": "^4.18.2",
+    "prop-types": "^15.8.1",
     "react": "^16.13.1",
     "react-dom": "^16.14.0",
     "react-scripts": "^3.4.1"
@@ -21,7 +22,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy:prod": "rsync -avzhe ssh --progress /home/casper--x7/Documents/Moringa_DevOps/week_4/yolo_IP2/client/public/* root@ip2.com:/home/casper--x7/Documents/Moringa_DevOps/week_4/yolo_IP2"
   },
   "proxy": "http://localhost3000",
   "eslintConfig": {
@@ -40,4 +40,3 @@
     ]
   }
 }
-

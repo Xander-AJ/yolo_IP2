@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   # MongoDB Container
   mongo_ip2:
@@ -13,7 +12,6 @@ services:
   # Node.js Backend Container with Ngrok
   node_ip2:
     container_name: node_ip2
-    image: node:latest
     build:
       context: .
       dockerfile: Dockerfile-node
@@ -24,7 +22,7 @@ services:
     volumes:
       - ./app:/app
     # Start Ngrok along with Node.js app
-    command: bash -c "npm install && node app.js & ./ngrok http 3000"
+    command: bash -c "npm install && node app.js & ./ngrok http 5000"
 
 networks:
   yolo_ip2_network:
@@ -33,4 +31,3 @@ networks:
 volumes:
   mongodb_data:
     driver: local
-
